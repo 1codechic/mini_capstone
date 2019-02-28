@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
     get "/products" => "products#all_products"
     get "/single_product" => "products#single_product"
-    get "/single_product_segment/:product" => "products#single_product_segment"
+    get "/single_product_segment/:id" => "products#single_product_segment"
   end
 
 end

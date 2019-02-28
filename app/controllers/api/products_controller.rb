@@ -10,4 +10,9 @@ class Api::ProductsController < ApplicationController
     render 'single_product.json.jbuilder'
   end
 
+  def single_product_segment
+    @product = Product.find(params[:id])
+    render 'single_product.json.jbuilder'
+  end
+
 end
