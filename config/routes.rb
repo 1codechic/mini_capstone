@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   #   get "/photos" => "photos#index"
   # end
   namespace :api do
-    get "/products" => "products#all_products"
-    get "/single_product" => "products#single_product"
+    get "/products" => "products#index"
+    get "/product/:id" => "products#show"
     get "/single_product_segment/:id" => "products#single_product_segment"
   end
 
