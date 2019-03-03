@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   # end
   namespace :api do
     get "/products" => "products#index"
-    get "/product/:id" => "products#show"
-    get "/single_product_segment/:id" => "products#single_product_segment"
+    get "/products/:id" => "products#show"
+    post "/products/new" => "products#create"
   end
 
 end

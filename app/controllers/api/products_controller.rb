@@ -11,9 +11,15 @@ class Api::ProductsController < ApplicationController
     render 'show.json.jbuilder'
   end
 
-  def single_product_segment
-    @product = Product.find(params[:id])
-    render 'single_product.json.jbuilder'
+  def create
+    @product = Product.new(
+      name: params[:input_name],
+      price: params[:input_price],
+      image_url: params[:input_url],
+      description: params[:input_description]
+      )
+    @product.save
+    render 'show.json.jbuilder'
   end
 
 end
