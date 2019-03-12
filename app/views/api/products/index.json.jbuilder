@@ -4,6 +4,7 @@ json.array! @products do |product|
   json.price product.price
   json.image_url product.image_url
   json.description product.description
+  json.supplier product.supplier.name
   json.discounted product.is_discounted?
 end
 
