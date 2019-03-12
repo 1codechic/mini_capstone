@@ -19,4 +19,9 @@ class Product < ApplicationRecord
    tax_rate = price * 0.09
    total_price = price + tax_rate
   end
+
+  def supplier
+    Supplier.find_by(id: supplier_id)
+  end
+
 end
