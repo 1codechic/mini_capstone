@@ -3,9 +3,6 @@ class Api::ProductsController < ApplicationController
   def index
     if params[:search]
       @products = Product.where("name iLIKE ?", "%#{params[:search]}%")
-    elsif 
-      search_term = params[:price]
-      @products = @products.where("price LIKE ?", )
     else
       @products= Product.all
     end
