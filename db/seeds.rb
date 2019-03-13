@@ -20,11 +20,21 @@
 
 
 #The code below will iterate through your products table and assign a random supplier id from the suppliers table
-products = Product.all
+# products = Product.all
 
-products.each do |product|
-  #assign it a new supplier
-  supplier_id = Supplier.all.sample.id 
-  product.supplier_id = supplier_id
-  product.save
-end
+# products.each do |product|
+#   #assign it a new supplier
+#   supplier_id = Supplier.all.sample.id 
+#   product.supplier_id = supplier_id
+#   product.save
+# end
+
+# This codes hooks the existing urls from the Products table with the Images table
+# products = Product.all
+
+# products.each do |product| 
+#   Image.create(
+#     url: product.image_url,
+#     product_id: product.id
+#     )
+# end
