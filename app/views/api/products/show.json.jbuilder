@@ -6,3 +6,4 @@ json.supplier_info @product.supplier
 json.price_discounted @product.is_discounted?
 json.tax @product.tax
 json.total @product.total
+json.current_user current_user
