@@ -1,20 +1,25 @@
 class Api::OrdersController < ApplicationController
 
   def create
+    #subtotal = quantity * price
+    product = Product.find_by(id: params[:product_id]) #allows us to get all info of the product
+    calculated_subtotal = params[:quantity].to_i * product.price
+    tax_rate = 0.09
+    calculated_tax = calculated_subtotal * tax_rate
+    calculated_total = calculated_subtotal + calculated_tax
+   
     @order = Order.new(
-      user_id: params[:user_id],
+      user_id: current_user.id,  #based on whose logged in
       product_id: params[:product_id],
-      product_name: params[:product_name],
       quantity: params[:quantity],
-      price: params[:price],
-      tax: params[:tax],
-      subtotal: params[:subtotal],
-      total: params[:total]
+      subtotal: calculated_subtotal,
+      tax: calculated_tax,
+      total: calculated_subtotal
       )
-    if @order.save
+    if @order.save!
       render 'order.json.jbuilder'
     else
-      render 'errors.json.jbuilder'
+      render 'order_errors.json.jbuilder'
     end
   end
 end
