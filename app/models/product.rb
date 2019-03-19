@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  belongs_to :supplier
   has_many :orders
   has_many :images
   has_many :product_categories
@@ -10,7 +11,7 @@ class Product < ApplicationRecord
   validates :description, presence: true, length: { in: 10..500}
 
   def is_discounted?
-    if price < 10
+    if price < 25
       true
     else
       false

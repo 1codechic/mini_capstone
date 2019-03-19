@@ -9,31 +9,31 @@ class Api::ProductsController < ApplicationController
     end
 
     if params[:discount] == "true"
-      @products = @products.where("price < ?", 50)
+      @products = @products.where("price < ?", 25)
     end
 
     if params[:sort] && params[:order]
-    @products = @products.order(params[:sort] => params[:order])
+      @products = @products.order(params[:sort] => params[:order])
     end
 
-     if params[:category]
-    #find the category
-    category = Category.find_by(name: params[:category])
-    #find all the products
-    @products = category.products
+    if params[:category]
+      # find the category
+      category = Category.find_by(name: params[:category])
+      # find all the products based on the category
+      @products = category.products
     end
-
     render 'index.json.jbuilder'
   end
 
 
-
+#everybody
   def show
     product_id = params[:id]
     @product = Product.find_by(id: product_id)
     render 'show.json.jbuilder'
   end
 
+#only admins
   def create
     @product = Product.new(
       name: params[:input_name],
