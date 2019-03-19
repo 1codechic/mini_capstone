@@ -15,8 +15,18 @@ class Api::ProductsController < ApplicationController
     if params[:sort] && params[:order]
     @products = @products.order(params[:sort] => params[:order])
     end
+
+     if params[:category]
+    #find the category
+    category = Category.find_by(name: params[:category])
+    #find all the products
+    @products = category.products
+    end
+
     render 'index.json.jbuilder'
   end
+
+
 
   def show
     product_id = params[:id]

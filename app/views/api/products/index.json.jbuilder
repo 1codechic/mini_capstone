@@ -3,7 +3,8 @@ json.array! @products do |product|
   json.name product.name
   json.price product.price
   json.description product.description
-  json.supplier product.supplier.name
+  #json.supplier product.supplier.name
   json.discounted product.is_discounted?
+  json.categories product.categories
 end
 
