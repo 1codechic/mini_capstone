@@ -9,7 +9,7 @@ class Api::ProductsController < ApplicationController
     end
 
     if params[:discount] == "true"
-      @products = @products.where("price < ?", 25)
+      @products = @products.where("price < ?", 19)
     end
 
     if params[:sort] && params[:order]
