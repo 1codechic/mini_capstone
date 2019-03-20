@@ -9,7 +9,7 @@ class Api::CartedProductsController < ApplicationController
         quantity: params[:quantity],
         status: "carted"
         )
-      render 'carted_product.json.jbuilder'
+      render 'show.json.jbuilder'
     end
   end
 
@@ -18,13 +18,13 @@ class Api::CartedProductsController < ApplicationController
       carted_product_id = params[:id]
       @carted_product = CartedProduct.find_by(id: carted_product_id)
       
-      render 'show_carted_product.json.jbuilder'
+      render 'show.json.jbuilder'
     end
 
     def index
       @carted_products = CartedProduct.all
       @carted_products = @carted_products.where(user_id: current_user.id)
       @carted_products = @carted_products.where(status: "carted")
-      render 'index_carted_product.json.jbuilder'
+      render 'index.json.jbuilder'
     end
 end

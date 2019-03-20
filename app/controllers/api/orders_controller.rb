@@ -33,9 +33,9 @@ class Api::OrdersController < ApplicationController
       @carted_products.each do |carted_product|
         carted_product.update(order_id: @order.id, status: "purchased")
         end
-      render 'order.json.jbuilder'
+      render 'show.json.jbuilder'
     else
-      render 'order_errors.json.jbuilder'
+      render 'errors.json.jbuilder'
     end
   end
 end

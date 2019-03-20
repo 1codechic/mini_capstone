@@ -1,1 +1,0 @@
-json.message "destroy method"
