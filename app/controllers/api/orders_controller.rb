@@ -8,21 +8,31 @@ class Api::OrdersController < ApplicationController
 
   def create
     #subtotal = quantity * price
-    product = Product.find_by(id: params[:product_id]) #allows us to get all info of the product
-    calculated_subtotal = params[:quantity].to_i * product.price
+    @carted_products = CartedProduct.all
+    @carted_products = @carted_products.where(user_id: current_user.id)
+    @carted_products = @carted_products.where(status: "carted")
+    #product = Product.find_by(id: params[:product_id]) #allows us to get all info of the product
+    subtotal = 0
+
+    @carted_products.each do |carted_product|
+      product_total = carted_product.product.price * carted_product.quantity
+      subtotal += product_total
+    end
+
     tax_rate = 0.09
-    calculated_tax = calculated_subtotal * tax_rate
-    calculated_total = calculated_subtotal + calculated_tax
+    tax = subtotal * tax_rate
+    total = subtotal + tax
    
     @order = Order.new(
       user_id: current_user.id,  #based on whose logged in
-      product_id: params[:product_id],
-      quantity: params[:quantity],
-      subtotal: calculated_subtotal,
-      tax: calculated_tax,
-      total: calculated_subtotal
+      subtotal: subtotal,
+      tax: tax,
+      total: subtotal
       )
-    if @order.save!
+    if @order.save
+      @carted_products.each do |carted_product|
+        carted_product.update(order_id: @order.id, status: "purchased")
+        end
       render 'order.json.jbuilder'
     else
       render 'order_errors.json.jbuilder'
