@@ -1,0 +1,15 @@
+<h2>You are on the Show page</h2>
+
+<a href="/products">All Products</a>
+
+<p>id: <%= @product.id %></p>
+<p>name: <%= @product.name %></p>
+<p>description: <%= @product.description%></p>
+<p>price: <%= @product.price %></p>
+<img src= "<%= @product.images[0].url %>">
+
+<form action="/products/<%= @product.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Product">
+</form>
+

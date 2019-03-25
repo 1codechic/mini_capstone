@@ -8,9 +8,9 @@ class Api::OrdersController < ApplicationController
 
   def create
     #subtotal = quantity * price
-    @carted_products = CartedProduct.all
-    @carted_products = @carted_products.where(user_id: current_user.id)
-    @carted_products = @carted_products.where(status: "carted")
+      @carted_products = CartedProduct.all
+      @carted_products = @carted_products.where(user_id: current_user.id)
+      @carted_products = @carted_products.where(status: "carted")
     #product = Product.find_by(id: params[:product_id]) #allows us to get all info of the product
     subtotal = 0
 
@@ -37,5 +37,10 @@ class Api::OrdersController < ApplicationController
     else
       render 'errors.json.jbuilder'
     end
+  end
+
+  def show
+    @order = Order.find_by(id: params[:id])
+    render 'show.json.jbuilder'
   end
 end
